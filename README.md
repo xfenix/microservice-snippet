@@ -34,3 +34,9 @@ Usage scenarios
 * Send request `/?source_url=<desired url>`;
 * Get answer immediately;
 * Wait answer on some url OR in MQ.
+
+Environment variables
+===
+* `SNIPPET_WORKERS` — desired number of uvicorn + fastapi workers;
+* `SNIPPET_HTML_PARSER` — backend for extraction of meta tags;
+* `SNIPPET_STORAGE` — backend for storaging meta tags data.

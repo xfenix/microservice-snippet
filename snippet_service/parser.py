@@ -7,9 +7,9 @@ import bs4
 
 
 @typing.runtime_checkable
-class BasicParser(typing.Protocol):
-    def __init__(self, html_source: str) -> None:
-        self._html_data: str = html_source
+class GeneralInterface(typing.Protocol):
+    """Interface contract.
+    """
 
     def run_parsing(self) -> BasicParser:
         """Run/init parser. Need to be chainable method.
@@ -22,7 +22,18 @@ class BasicParser(typing.Protocol):
         ...
 
 
+class BasicParser:
+    """Just basic parent.
+    """
+
+    def __init__(self, html_source: str) -> None:
+        self._html_data: str = html_source
+
+
 class BSParser(BasicParser):
+    """Implementation of beautiful soup based parser.
+    """
+
     def run_parsing(self) -> BSParser:
         """Init parser, default provider — lxml (its fastets).
         """

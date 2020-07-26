@@ -5,9 +5,9 @@ import typing
 
 
 @typing.runtime_checkable
-class BasicStorage(typing.Protocol):
-    def __init__(self, source_url: str) -> None:
-        self._data_url: str = source_url
+class GeneralInterface(typing.Protocol):
+    """Interface contract.
+    """
 
     def exists(self) -> bool:
         """Check is snippet already in storage.
@@ -25,8 +25,18 @@ class BasicStorage(typing.Protocol):
         ...
 
 
-@typing.runtime_checkable
-class NoStorage(typing.Protocol):
+class BasicStorage:
+    """Very simple parent.
+    """
+
+    def __init__(self, source_url: str) -> None:
+        self._data_url: str = source_url
+
+
+class NoStorage(BasicStorage):
+    """No storage backend.
+    """
+
     def __init__(self, source_url: str) -> None:
         self._data_url: str = source_url
 

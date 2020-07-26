@@ -13,6 +13,7 @@ cchardet = "*"
 aiodns = "*"
 beautifulsoup4 = "*"
 lxml = "*"
+uvloop = "*"
 
 [requires]
 python_version = "3.8"

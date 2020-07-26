@@ -8,11 +8,17 @@ from fastapi import FastAPI
 
 from snippet_service import settings
 from snippet_service import helpers
+from snippet_service import parser
+from snippet_service import storage
 
 
 APP_OBJ: FastAPI = FastAPI()
 HTML_PARSER_ACTOR: typing.Any = helpers.load_actor(settings.PARSER_PROVIDER)
 STORAGE_ACTOR: typing.Any = helpers.load_actor(settings.STORAGE_PROVIDER)
+assert isinstance(
+    HTML_PARSER_ACTOR, parser.GeneralInterface
+), "HTML parser class doesnt provide necessary interface contract"
+assert isinstance(STORAGE_ACTOR, storage.GeneralInterface), "Storage class doesnt provide necessary interface contract"
 
 
 @APP_OBJ.get("/")
