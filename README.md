@@ -4,6 +4,13 @@ Lets say you are building chat application, social network, or just plain old co
 Example snippet (this illustrates what are we talking about):<br>
 <img src="./doc/preview.png" width="400">
 
+Quickstart
+===
+### Docker alone
+* `cp .env.dist .env`
+* change environment variables in `.env` to desired state (check values lower)
+* `docker run --env-file .env micro-snippet-maker bin/app/run.sh`
+
 Usage scenarios
 ===
 ### Usual sync REST service
