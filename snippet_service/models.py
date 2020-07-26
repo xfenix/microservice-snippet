@@ -31,5 +31,6 @@ class SnippetAnswer(BaseModel):
 
     source_url: str
     result: Status
+    result_info: typing.Optional[str]
     parse_time: typing.Optional[int]
     payload: typing.Optional[SnippetBody]
