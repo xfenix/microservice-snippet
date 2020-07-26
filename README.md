@@ -1,6 +1,7 @@
 # Microservice for snippet creation
 This microservice intended to consume url and return json with snippet metadata (see picture for more details). Also it provides image width and height (exact answer structure will be available later).<br>
-Example snippet:<br>
+Lets say you are building chat application, social network, or just plain old comment system. You will need some service, that fetch metadata from urls for json for snippet creation. This service provide this functionality.<br>
+Example snippet (this illustrates what are we talking about):<br>
 <img src="./doc/preview.png" width="400">
 
 Usage scenarios
