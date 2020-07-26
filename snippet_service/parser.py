@@ -26,8 +26,9 @@ class BasicParser:
     """Just basic parent.
     """
 
-    def __init__(self, html_source: str) -> None:
+    def __init__(self, source_url: str, html_source: str) -> None:
         self._html_data: str = html_source
+        self._url_source: str = source_url
 
 
 class BSParser(BasicParser):
