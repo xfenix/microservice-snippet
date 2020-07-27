@@ -29,6 +29,7 @@ async def fetch_remote_snippet(source_url: str):
     """Fetch snippet from url and store it in db.
     """
     store_actor: typing.Any = STORAGE_ACTOR(source_url)
+    store_actor.init_storage()
     if store_actor.exists():
         return store_actor.fetch()
     try:

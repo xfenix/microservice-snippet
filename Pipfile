@@ -14,6 +14,10 @@ aiodns = "*"
 beautifulsoup4 = "*"
 lxml = "*"
 uvloop = "*"
+envcast = "*"
+xxhash = "*"
+orjson = "*"
+aiofile = "*"
 
 [requires]
 python_version = "3.8"

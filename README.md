@@ -9,7 +9,14 @@ Quickstart
 ### Docker alone
 * `cp .env.dist .env`
 * change environment variables in `.env` to desired state (check values lower)
-* `docker run --env-file .env micro-snippet-maker bin/app/run.sh`
+* run service like this:
+    ```bash
+    docker run\
+    --env-file .env micro-snippet-maker\
+    -v /srv/host_storage/:/srv/storage/\
+    microservice-snippet:latest\
+    bin/app/run.sh
+    ```
 
 Usage scenarios
 ===
