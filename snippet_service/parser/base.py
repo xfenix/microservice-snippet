@@ -3,6 +3,8 @@
 from __future__ import annotations
 import typing
 
+from snippet_service import models
+
 
 @typing.runtime_checkable
 class GeneralInterface(typing.Protocol):
@@ -19,7 +21,7 @@ class GeneralInterface(typing.Protocol):
         """
         ...
 
-    def extract_meta(self) -> typing.Type:
+    def extract_meta(self) -> models.SnippetBody:
         """Extract snippet data. Need to be chainable method.
         """
         ...

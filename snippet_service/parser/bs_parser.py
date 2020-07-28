@@ -5,6 +5,7 @@ import typing
 
 import bs4
 
+from snippet_service import models
 from .base import BasicParser
 
 
@@ -18,7 +19,7 @@ class BSParser(BasicParser):
         self._parser: bs4.BeautifulSoup = bs4.BeautifulSoup(self._html_data, "lxml")
         return self
 
-    def extract_meta(self) -> BSParser:
+    def extract_meta(self) -> models.SnippetBody:
         """
         """
-        return self
+        return models.SnippetBody
