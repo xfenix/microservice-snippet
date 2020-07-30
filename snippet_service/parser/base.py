@@ -3,6 +3,8 @@
 from __future__ import annotations
 import typing
 
+import aiohttp
+
 from snippet_service import models
 
 
@@ -16,7 +18,7 @@ class GeneralInterface(typing.Protocol):
         """
         ...
 
-    def run_parsing(self) -> typing.Type:
+    async def run_parsing(self) -> typing.Type:
         """Run/init parser. Need to be chainable method.
         """
         ...
@@ -31,7 +33,15 @@ class BasicParser:
     """Just basic parent.
     """
 
-    def setup(self, source_url: str, html_source: str) -> None:
-        self._html_data: str = html_source
+    _html_data: str = ''
+
+    def setup(self, source_url: str) -> None:
         self._url_source: str = source_url
         return self
+
+    async def run_parsing(self):
+        """Basic parsing realisation.
+        """
+        async with aiohttp.ClientSession() as session:
+            async with session.get(self.source_url) as response:
+

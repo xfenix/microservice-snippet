@@ -5,8 +5,8 @@ import typing
 
 import bs4
 
-from snippet_service import models
 from .base import BasicParser
+from snippet_service import models
 
 
 class BSParser(BasicParser):

@@ -16,13 +16,13 @@ class GeneralInterface(typing.Protocol):
         """
         ...
 
-    async def format_request(self) -> typing.Type:
-        """Run/init parser. Need to be chainable method.
+    def format_response(self) -> typing.Type:
+        """Format response for current session.
         """
         ...
 
-    async def submit_back(self) -> typing.Type:
-        """Run/init parser. Need to be chainable method.
+    async def submit_back(self) -> None:
+        """Submit request back.
         """
         ...
 
@@ -30,3 +30,16 @@ class GeneralInterface(typing.Protocol):
 class BasicComebacker:
     """Just basic parent.
     """
+
+    async def connect(self) -> typing.Type:
+        """Do nothing.
+        """
+        return self
+
+    def format_response(self) -> None:
+        """Do nothing.
+        """
+
+    async def submit_back(self) -> None:
+        """Do nothing.
+        """

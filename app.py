@@ -1,18 +1,13 @@
 """Core module.
 """
-import typing
 import logging
+import typing
 
-import bs4
 import aiohttp
-from fastapi import FastAPI, Depends
+import bs4
+from fastapi import Depends, FastAPI
 
-from snippet_service import settings
-from snippet_service import helpers
-from snippet_service import parser
-from snippet_service import storage
-from snippet_service import models
-
+from snippet_service import helpers, models, parser, settings, storage
 
 APP_OBJ: FastAPI = FastAPI()
 LOGGER_OBJ: logging.Logger = logging.getLogger(__file__)
@@ -51,8 +46,10 @@ async def fetch_remote_snippet(
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(source_url) as response:
-                meta_tags: dict = parser_actor.setup(source_url, await response.text()).run_parsing().extract_meta()
-                storage_actor.save(meta_tags)
+                extracted_meta: dict = parser_actor.setup(
+                    source_url, await response.text()
+                ).run_parsing().extract_meta()
+                storage_actor.save(extracted_meta)
                 return models.SnippetAnswer(source_url=source_url, result=models.Status.JOB_OK)
     except aiohttp.ClientError as error_obj:
         LOGGER_OBJ.exception(f"Exception happens during snippet extraction: {error_obj}")

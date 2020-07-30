@@ -1,8 +1,8 @@
 """Basic helpers module.
 """
 from __future__ import annotations
-import typing
 import importlib
+import typing
 
 
 def load_actor(full_class_path: str) -> typing.Any:
