@@ -19,11 +19,13 @@ async def startup_event() -> None:
     """Validate interfaces on start.
     """
     assert isinstance(
-        helpers.load_actor(settings.STORAGE_PROVIDER), storage.GeneralInterface
+        helpers.load_actor_safe(settings.STORAGE_PROVIDER), storage.GeneralInterface
     ), "Storage class doesnt provide necessary interface contract"
     assert isinstance(
-        helpers.load_actor(settings.PARSER_PROVIDER), parser.GeneralInterface
+        helpers.load_actor_safe(settings.PARSER_PROVIDER), parser.GeneralInterface
     ), "HTML parser class doesnt provide necessary interface contract"
+    if settings.COMEBACKER_ACTOR:
+        assert callable(helpers.load_actor_safe(settings.COMEBACKER_ACTOR)), "Comebacker is not callable"
 
 
 async def storage_dep() -> typing.AsyncGenerator[typing.Any, None]:
@@ -55,14 +57,13 @@ async def fetch_remote_snippet(
 ):
     """Fetch snippet from url and store it in db.
     """
-
     await storage_actor.setup(source_url)
     if await storage_actor.exists():
         return models.SnippetAnswer(source_url=source_url, payload=await storage_actor.fetch())
     try:
         extracted_meta: dict = await parser_actor.setup(source_url).fetch_and_extract()
         await storage_actor.save(extracted_meta)
-        if comebacker_actor:
+        if callable(comebacker_actor):
             pass
         return models.SnippetAnswer(source_url=source_url, payload=extracted_meta)
     except aiohttp.ClientError as error_obj:
