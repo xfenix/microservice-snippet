@@ -3,12 +3,12 @@
 from __future__ import annotations
 from urllib import parse as url_lib
 
-import xxhash
-import orjson
 import aiofile
+import orjson
+import xxhash
 
-from snippet_service import settings
 from .base import BasicStorage
+from snippet_service import settings
 
 
 class FileStorage(BasicStorage):
@@ -43,7 +43,7 @@ class FileStorage(BasicStorage):
         async with aiofile.AIOFile(str(self._cache_full_path), "w+") as file_handler:
             await file_handler.write(orjson.dumps(snippet_data))
 
-    async def fetch(self) -> dict:
+    async def fetch_raw(self) -> dict:
         """Fetch snippet data from storage.
         """
         async with aiofile.AIOFile(str(self._cache_full_path), "r") as file_handler:

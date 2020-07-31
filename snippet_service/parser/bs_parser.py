@@ -9,17 +9,12 @@ from .base import BasicParser
 from snippet_service import models
 
 
-class BSParser(BasicParser):
+class AsyncBS(BasicParser):
     """Implementation of beautiful soup based parser.
     """
 
-    def run_parsing(self) -> BSParser:
-        """Init parser, default provider — lxml (its fastets).
+    def extract_meta(self, response_body: str) -> models.SnippetBody:
+        """Extracts data from downloaded page.
         """
-        self._parser: bs4.BeautifulSoup = bs4.BeautifulSoup(self._html_data, "lxml")
-        return self
-
-    def extract_meta(self) -> models.SnippetBody:
-        """
-        """
+        parser_obj: bs4.BeautifulSoup = bs4.BeautifulSoup(response_body, "lxml")
         return models.SnippetBody

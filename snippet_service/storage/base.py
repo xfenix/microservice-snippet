@@ -25,11 +25,16 @@ class GeneralInterface(typing.Protocol):
         ...
 
     async def save(self, snippet_data: dict) -> None:
-        """Save snippet data in storage.
+        """Save raw json data in storage.
         """
         ...
 
-    async def fetch(self) -> dict:
+    async def fetch_raw(self) -> dict:
+        """Fetch raw json data from storage.
+        """
+        ...
+
+    async def fetch(self) -> model.SnippetBody:
         """Fetch snippet data from storage.
         """
         ...
@@ -48,3 +53,8 @@ class BasicStorage:
         """
         self._data_url: str = source_url
         return self
+
+    async def fetch(self) -> model.SnippetBody:
+        """Fetch snippet data from storage.
+        """
+        return models.SnippetBody(**await self.fetch_raw())

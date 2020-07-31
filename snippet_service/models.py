@@ -30,7 +30,7 @@ class SnippetAnswer(BaseModel):
     """
 
     source_url: str
-    result: Status
+    result: str = Status.JOB_OK
     result_info: typing.Optional[str]
     parse_time: typing.Optional[int]
     payload: typing.Optional[SnippetBody]
