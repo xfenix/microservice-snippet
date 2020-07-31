@@ -11,7 +11,7 @@ from .base import BasicStorage
 from snippet_service import settings
 
 
-class FileStorage(BasicStorage):
+class File(BasicStorage):
     """File storage backend.
     Stores snippet data in file system.
     """

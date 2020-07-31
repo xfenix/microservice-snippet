@@ -5,7 +5,7 @@ from __future__ import annotations
 from .base import BasicStorage
 
 
-class NoStorage(BasicStorage):
+class Dummy(BasicStorage):
     """No storage backend.
     """
 
@@ -19,7 +19,7 @@ class NoStorage(BasicStorage):
         """
         return
 
-    async def fetch(self) -> dict:
+    async def fetch_raw(self) -> dict:
         """Fetch snippet data from storage.
         """
         return {}

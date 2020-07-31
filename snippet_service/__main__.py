@@ -15,7 +15,7 @@ LOGGER_OBJ: logging.Logger = logging.getLogger(__file__)
 
 
 @APP_OBJ.on_event("startup")
-async def startup_event():
+async def startup_event() -> None:
     """Validate interfaces on start.
     """
     assert isinstance(
@@ -26,7 +26,7 @@ async def startup_event():
     ), "HTML parser class doesnt provide necessary interface contract"
 
 
-async def storage_dep() -> typing.Generator[typing.Any]:
+async def storage_dep() -> typing.AsyncGenerator[typing.Any, None]:
     """Load storage backend.
     """
     actor_object: typing.Any = helpers.load_actor(settings.STORAGE_PROVIDER)()
@@ -34,13 +34,13 @@ async def storage_dep() -> typing.Generator[typing.Any]:
     yield actor_object
 
 
-def html_parser_dep() -> typing.Generator[typing.Any]:
+def html_parser_dep() -> typing.AsyncGenerator[typing.Any, None]:
     """Load html parser backends.
     """
     yield helpers.load_actor(settings.PARSER_PROVIDER)()
 
 
-def comebacker_dep() -> typing.Optional[typing.Generator[typing.Any]]:
+def comebacker_dep() -> typing.Optional[typing.AsyncGenerator[typing.Any, None]]:
     """Load html parser backends.
     """
     yield helpers.load_actor(settings.COMEBACKER_ACTOR) if settings.COMEBACKER_ACTOR else None
