@@ -43,7 +43,7 @@ def html_parser_dep() -> typing.Generator[typing.Any]:
 def comebacker_dep() -> typing.Optional[typing.Generator[typing.Any]]:
     """Load html parser backends.
     """
-    yield helpers.load_actor(settings.COMEBACKER_ACTOR)
+    yield helpers.load_actor(settings.COMEBACKER_ACTOR) if settings.COMEBACKER_ACTOR else None
 
 
 @APP_OBJ.get("/", response_model=models.SnippetAnswer)
