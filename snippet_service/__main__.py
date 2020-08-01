@@ -63,7 +63,7 @@ async def fetch_remote_snippet(
     try:
         extracted_meta: dict = await parser_actor.setup(source_url).fetch_and_extract()
         await storage_actor.save(extracted_meta)
-        if callable(comebacker_actor):
+        if comebacker_actor:
             pass
         return models.SnippetAnswer(source_url=source_url, payload=extracted_meta)
     except aiohttp.ClientError as error_obj:
