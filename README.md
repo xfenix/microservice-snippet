@@ -1,6 +1,7 @@
 # Microservice for snippet creation
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://timothycrosley.github.io/isort/)
+
 This microservice intended to consume url and return json with snippet metadata (see picture for more details). Also it provides image width and height (exact answer structure will be available later).<br>
 Lets say you are building chat application, social network, or just plain old comment system. You will need some service, that fetch metadata from urls for json for snippet creation. This service provide this functionality.
 
