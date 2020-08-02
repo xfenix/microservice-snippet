@@ -5,9 +5,10 @@
 https://img.shields.io/badge/imports-isort-%231674b1?style=flat&labelColor=ef8336
 
 This microservice intended to consume url and return json with snippet metadata (see picture for more details). Also it provides image width and height (exact answer structure will be available later).<br>
-Lets say you are building chat application, social network, or just plain old comment system. You will need some service, that fetch metadata from urls for json for snippet creation. This service provide this functionality.<br>
+Lets say you are building chat application, social network, or just plain old comment system. You will need some service, that fetch metadata from urls for json for snippet creation. This service provide this functionality.
+
 Example snippet (this illustrates what are we talking about):<br>
-<img src="./doc/preview.png" width="400">
+<a href="./doc/preview.png"><img src="./doc/preview.png" width="300"></a>
 
 Quickstart
 ===
