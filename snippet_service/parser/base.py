@@ -5,7 +5,7 @@ import typing
 
 import aiohttp
 
-from snippet_service import models
+from snippet_service import exceptions, models
 
 
 @typing.runtime_checkable
@@ -40,6 +40,10 @@ class BasicParser:
     async def fetch_and_extract(self):
         """Basic parsing realisation.
         """
-        async with aiohttp.ClientSession() as session:
-            async with session.get(self._url_source) as response:
-                return self.extract_meta(await response.text())
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(self._url_source) as response:
+                    return self.extract_meta(await response.text())
+        except aiohttp.ClientError as error_obj:
+            LOGGER_OBJ.exception(f"Exception happens during snippet extraction: {error_obj} — {type(error_obj)}")
+            raise exceptions.ParserFetchException

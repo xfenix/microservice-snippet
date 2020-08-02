@@ -8,7 +8,7 @@ import orjson
 import xxhash
 
 from .base import BasicStorage
-from snippet_service import settings
+from snippet_service import exceptions, settings
 
 
 class FileStorage(BasicStorage):
@@ -40,8 +40,12 @@ class FileStorage(BasicStorage):
         """Save snippet data in storage.
         """
         self._cache_full_path.mkdir(parents=True, exist_ok=True)
-        async with aiofiles.open(str(self._cache_full_path), "w+") as file_handler:
-            await file_handler.write(orjson.dumps(snippet_data))
+        try:
+            async with aiofiles.open(str(self._cache_full_path), "w+") as file_handler:
+                await file_handler.write(orjson.dumps(snippet_data))
+        except (OSError, FileNotFoundError, IsADirectoryError, PermissionError, InterruptedError) as error_obj:
+            LOGGER_OBJ.exception(f"Exception happens during file cache extraction: {error_obj} — {type(error_obj)}")
+            raise exceptions.StoreSaveException
 
     async def fetch_raw(self) -> dict:
         """Fetch snippet data from storage.
