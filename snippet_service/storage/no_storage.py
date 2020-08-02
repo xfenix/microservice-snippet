@@ -5,7 +5,7 @@ from __future__ import annotations
 from .base import BasicStorage
 
 
-class Dummy(BasicStorage):
+class DummyStorage(BasicStorage):
     """No storage backend.
     """
 

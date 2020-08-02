@@ -29,5 +29,5 @@ def load_actor_safe(full_class_path: str) -> typing.Any:
     try:
         return load_actor(full_class_path)
     except ModuleNotFoundError as exc:
-        LOGGER_OBJ.error(f"{type(exc)}. Cant load module {full_class_path}. Exception message: {exc}")
-        return None
+        LOGGER_OBJ.error(f"Cant load module {full_class_path}")
+        raise exc

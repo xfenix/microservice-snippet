@@ -9,7 +9,7 @@ from .base import BasicParser
 from snippet_service import models
 
 
-class AsyncBS(BasicParser):
+class AsyncBSParser(BasicParser):
     """Implementation of beautiful soup based parser.
     """
 

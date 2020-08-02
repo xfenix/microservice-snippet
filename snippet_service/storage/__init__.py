@@ -1,5 +1,5 @@
 """Just helper imports.
 """
 from .base import BasicStorage, GeneralInterface
-from .file_storage import File
-from .no_storage import Dummy
+from .file_storage import FileStorage
+from .no_storage import DummyStorage
