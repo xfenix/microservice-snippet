@@ -5,8 +5,7 @@ import typing
 
 @typing.runtime_checkable
 class GeneralInterface(typing.Protocol):
-    """Interface contract.
-    """
+    """Interface contract."""
 
     async def setup(self, source_url: str) -> typing.Type:
         """Run init per snippet request."""

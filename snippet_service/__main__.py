@@ -1,5 +1,4 @@
-"""Core module.
-"""
+"""Core module."""
 import logging
 import typing
 

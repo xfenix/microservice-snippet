@@ -12,6 +12,7 @@ from snippet_service import exceptions, settings
 
 class FileStorage(BasicStorage):
     """File storage backend.
+
     Stores snippet data in file system.
     """
 

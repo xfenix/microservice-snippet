@@ -1,5 +1,4 @@
-"""Pydantic models here.
-"""
+"""Pydantic models here."""
 import enum
 import typing
 
@@ -7,16 +6,14 @@ from pydantic import BaseModel
 
 
 class Status(enum.Enum):
-    """Service statuses.
-    """
+    """Service statuses."""
 
     JOB_OK: str = "ok"
     JOB_FAIL: str = "fail"
 
 
 class SnippetBody(BaseModel):
-    """Snippet data itself.
-    """
+    """Snippet data itself."""
 
     url: str
     domain: str
@@ -26,8 +23,7 @@ class SnippetBody(BaseModel):
 
 
 class SnippetAnswer(BaseModel):
-    """Main answer model wrapper.
-    """
+    """Main answer model wrapper."""
 
     source_url: str
     result: str = Status.JOB_OK
