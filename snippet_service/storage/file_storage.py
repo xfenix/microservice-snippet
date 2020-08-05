@@ -1,5 +1,4 @@
-"""Parser interfaces and realisations.
-"""
+"""Parser interfaces and realisations."""
 from __future__ import annotations
 from urllib import parse as url_lib
 
@@ -19,8 +18,7 @@ class FileStorage(BasicStorage):
     EXTENSION: str = ".cache.txt"
 
     async def init_storage(self) -> None:
-        """Run init.
-        """
+        """Run init."""
         _hash_digest: str = xxhash.xxh64(self._data_url).hexdigest()
         _url_parts: url_lib.ParseResult = url_lib.urlparse(self._data_url)
         self._cache_full_path: pathlib.Path = (
@@ -32,13 +30,11 @@ class FileStorage(BasicStorage):
         )
 
     async def exists(self) -> bool:
-        """Check is snippet already in storage.
-        """
+        """Check is snippet already in storage."""
         return self._cache_full_path.exists()
 
     async def save(self, snippet_data: dict) -> None:
-        """Save snippet data in storage.
-        """
+        """Save snippet data in storage."""
         self._cache_full_path.mkdir(parents=True, exist_ok=True)
         try:
             async with aiofiles.open(str(self._cache_full_path), "w+") as file_handler:
@@ -48,7 +44,6 @@ class FileStorage(BasicStorage):
             raise exceptions.StoreSaveException
 
     async def fetch_raw(self) -> dict:
-        """Fetch snippet data from storage.
-        """
+        """Fetch snippet data from storage."""
         async with aiofiles.open(str(self._cache_full_path), "r") as file_handler:
             return orjson.loads(await file_handler.read())

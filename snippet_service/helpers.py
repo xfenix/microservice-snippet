@@ -1,5 +1,4 @@
-"""Basic helpers module.
-"""
+"""Basic helpers module."""
 from __future__ import annotations
 import importlib
 import logging

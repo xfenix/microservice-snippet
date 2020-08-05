@@ -16,8 +16,7 @@ LOGGER_OBJ: logging.Logger = logging.getLogger(__file__)
 
 @APP_OBJ.on_event("startup")
 async def startup_event() -> None:
-    """Validate interfaces on start.
-    """
+    """Validate interfaces on start."""
     assert isinstance(
         helpers.load_actor_safe(settings.STORAGE_PROVIDER), storage.GeneralInterface
     ), "Storage class doesnt provide necessary interface contract"
@@ -29,22 +28,19 @@ async def startup_event() -> None:
 
 
 async def storage_dep() -> typing.AsyncGenerator[typing.Any, None]:
-    """Load storage backend.
-    """
+    """Load storage backend."""
     actor_object: typing.Any = helpers.load_actor(settings.STORAGE_PROVIDER)()
     await actor_object.init_storage()
     yield actor_object
 
 
 def html_parser_dep() -> typing.AsyncGenerator[typing.Any, None]:
-    """Load html parser backends.
-    """
+    """Load html parser backends."""
     yield helpers.load_actor(settings.PARSER_PROVIDER)()
 
 
 def comebacker_dep() -> typing.Optional[typing.AsyncGenerator[typing.Any, None]]:
-    """Load html parser backends.
-    """
+    """Load html parser backends."""
     yield helpers.load_actor(settings.COMEBACKER_ACTOR) if settings.COMEBACKER_ACTOR else None
 
 
@@ -56,8 +52,7 @@ async def fetch_remote_snippet(
     parser_actor=Depends(html_parser_dep),
     comebacker_actor=Depends(comebacker_dep),
 ):
-    """Fetch snippet from url and store it in db.
-    """
+    """Fetch snippet from url and store it in db."""
     result_store: typing.Optional[models.SnippetAnswer] = None
     await storage_actor.setup(source_url)
     if not force_renew and await storage_actor.exists():

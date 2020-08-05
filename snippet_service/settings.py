@@ -1,5 +1,4 @@
-"""All settings here.
-"""
+"""All settings here."""
 import pathlib
 
 import envcast

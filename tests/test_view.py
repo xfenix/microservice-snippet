@@ -8,4 +8,4 @@ from tests import helpers
 def test_with_empty_params():
     """Basic validation test.
     """
-    assert helpers.build_test_client().get("/").status_code == 400
+    assert helpers.build_test_client().get("/").status_code == 422
