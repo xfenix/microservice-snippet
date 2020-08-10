@@ -36,6 +36,8 @@ class GeneralInterface(typing.Protocol):
 class BasicParser:
     """Just basic parent."""
 
+    FIELDS_OF_INTEREST: typing.Tuple[str] = ("title", "description", "image")
+
     def setup(self, source_url: str) -> None:
         self._url_source: str = source_url
         return self
