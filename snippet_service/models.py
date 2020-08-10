@@ -1,4 +1,5 @@
 """Pydantic models here."""
+# pylint: disable=too-few-public-methods
 import enum
 import typing
 
