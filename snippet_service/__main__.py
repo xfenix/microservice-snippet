@@ -1,4 +1,5 @@
 """Core module."""
+import asyncio
 import logging
 import typing
 
@@ -74,7 +75,8 @@ async def fetch_remote_snippet(
         result_store = models.SnippetAnswer(source_url=source_url, payload=extracted_meta)
 
     if comebacker_actor:
-        comebacker_actor(source_url, extracted_meta)
+        asyncio.create_task(comebacker_actor(source_url, extracted_meta))
+        result_store.is_comeback_goes_on = True
 
     typing.cast(models.SnippetAnswer, result_store)
     return result_store

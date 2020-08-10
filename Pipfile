@@ -23,6 +23,7 @@ xxhash = "*"
 orjson = "*"
 aiofile = "*"
 aiofiles = "*"
+aiokafka = "*"
 
 [requires]
 python_version = "3.8"

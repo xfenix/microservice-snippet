@@ -30,3 +30,4 @@ class SnippetAnswer(BaseModel):
     result_info: typing.Optional[str]
     parse_time: typing.Optional[int]
     payload: typing.Optional[SnippetBody]
+    is_comeback_goes_on: bool = False
