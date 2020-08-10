@@ -3,8 +3,6 @@ import asyncio
 import logging
 import typing
 
-import aiohttp
-import bs4
 import fastapi
 
 from snippet_service import exceptions, helpers, models, parser, settings, storage
@@ -62,7 +60,7 @@ async def fetch_remote_snippet(
     if not result_store:
         try:
             extracted_meta: dict = await parser_actor.setup(source_url).fetch_and_extract()
-        except exceptions.ParserFetchException:
+        except exceptions.ParserFetchException as error_obj:
             LOGGER_OBJ.exception(f"Exception happens during snippet extraction, url: {source_url}")
             return models.SnippetAnswer(
                 source_url=source_url, result=models.Status.JOB_FAIL, result_info=str(error_obj)
