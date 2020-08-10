@@ -1,5 +1,7 @@
 """Parser interfaces and realisations."""
 from __future__ import annotations
+import logging
+import pathlib
 from urllib import parse as url_lib
 
 import aiofiles
@@ -8,6 +10,9 @@ import xxhash
 
 from .base import BasicStorage
 from snippet_service import exceptions, settings
+
+
+LOGGER_OBJ: logging.Logger = logging.getLogger(__file__)
 
 
 class FileStorage(BasicStorage):

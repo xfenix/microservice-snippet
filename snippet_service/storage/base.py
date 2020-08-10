@@ -2,6 +2,8 @@
 from __future__ import annotations
 import typing
 
+from snippet_service import models
+
 
 @typing.runtime_checkable
 class GeneralInterface(typing.Protocol):
@@ -27,7 +29,7 @@ class GeneralInterface(typing.Protocol):
         """Fetch raw json data from storage."""
         ...
 
-    async def fetch(self) -> model.SnippetBody:
+    async def fetch(self) -> models.SnippetBody:
         """Fetch snippet data from storage."""
         ...
 
@@ -43,6 +45,6 @@ class BasicStorage:
         self._data_url: str = source_url
         return self
 
-    async def fetch(self) -> model.SnippetBody:
+    async def fetch(self) -> models.SnippetBody:
         """Fetch snippet data from storage (basically wrapper method)."""
         return models.SnippetBody(**await self.fetch_raw())

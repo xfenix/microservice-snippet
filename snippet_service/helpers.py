@@ -19,8 +19,7 @@ def load_actor(full_class_path: str) -> typing.Any:
         class_name: str
         full_module_path, class_name = full_class_path.split(":")
         return getattr(importlib.import_module(full_module_path), class_name)
-    else:
-        return importlib.import_module(full_class_path)
+    return importlib.import_module(full_class_path)
 
 
 def load_actor_safe(full_class_path: str) -> typing.Any:

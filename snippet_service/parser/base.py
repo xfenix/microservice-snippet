@@ -1,10 +1,14 @@
 """Parser interfaces and realisations."""
 from __future__ import annotations
+import logging
 import typing
 
 import aiohttp
 
 from snippet_service import exceptions, models
+
+
+LOGGER_OBJ: logging.Logger = logging.getLogger(__file__)
 
 
 @typing.runtime_checkable
@@ -39,6 +43,7 @@ class BasicParser:
     FIELDS_OF_INTEREST: typing.Tuple[str] = ("title", "description", "image")
 
     def setup(self, source_url: str) -> None:
+        """Simple setup method (now it just like setter)."""
         self._url_source: str = source_url
         return self
 
