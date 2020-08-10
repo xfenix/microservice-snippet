@@ -7,7 +7,7 @@ import typing
 class GeneralInterface(typing.Protocol):
     """Interface contract."""
 
-    async def setup(self, source_url: str) -> typing.Type:
+    def provide_url(self, source_url: str) -> typing.Type:
         """Run init per snippet request."""
         ...
 
@@ -38,11 +38,11 @@ class BasicStorage:
     async def init_storage(self) -> None:
         """By default do nothing."""
 
-    async def setup(self, source_url: str) -> BasicStorage:
-        """Setup basic attr."""
+    def provide_url(self, source_url: str) -> BasicStorage:
+        """Setup basic source url addr."""
         self._data_url: str = source_url
         return self
 
     async def fetch(self) -> model.SnippetBody:
-        """Fetch snippet data from storage."""
+        """Fetch snippet data from storage (basically wrapper method)."""
         return models.SnippetBody(**await self.fetch_raw())

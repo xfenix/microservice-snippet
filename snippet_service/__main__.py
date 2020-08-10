@@ -4,12 +4,13 @@ import typing
 
 import aiohttp
 import bs4
-from fastapi import Depends, FastAPI
+import fastapi
 
 from snippet_service import exceptions, helpers, models, parser, settings, storage
 
 
-APP_OBJ: FastAPI = FastAPI()
+APP_OBJ: fastapi.FastAPI = fastapi.FastAPI()
+ROUTER_OBJ: fastapi.APIRouter = fastapi.APIRouter()
 LOGGER_OBJ: logging.Logger = logging.getLogger(__file__)
 
 
@@ -43,17 +44,17 @@ def comebacker_dep() -> typing.Optional[typing.AsyncGenerator[typing.Any, None]]
     yield helpers.load_actor(settings.COMEBACKER_ACTOR) if settings.COMEBACKER_ACTOR else None
 
 
-@APP_OBJ.get("/", response_model=models.SnippetAnswer)
+@ROUTER_OBJ.get("/", response_model=models.SnippetAnswer)
 async def fetch_remote_snippet(
     source_url: str,
     force_renew: bool = False,
-    storage_actor=Depends(storage_dep),
-    parser_actor=Depends(html_parser_dep),
-    comebacker_actor=Depends(comebacker_dep),
+    storage_actor=fastapi.Depends(storage_dep),
+    parser_actor=fastapi.Depends(html_parser_dep),
+    comebacker_actor=fastapi.Depends(comebacker_dep),
 ):
     """Fetch snippet from url and store it in db."""
     result_store: typing.Optional[models.SnippetAnswer] = None
-    await storage_actor.setup(source_url)
+    await storage_actor.provide_url(source_url)
     if not force_renew and await storage_actor.exists():
         result_store = models.SnippetAnswer(source_url=source_url, payload=await storage_actor.fetch())
 
@@ -77,3 +78,6 @@ async def fetch_remote_snippet(
 
     typing.cast(models.SnippetAnswer, result_store)
     return result_store
+
+
+APP_OBJ.include_router(ROUTER_OBJ, prefix=settings.API_PREFIX)
