@@ -46,7 +46,7 @@ class FileStorage(BasicStorage):
             async with aiofiles.open(str(self._cache_full_path), "w+") as file_handler:
                 await file_handler.write(orjson.dumps(snippet_data))
         except (OSError, FileNotFoundError, IsADirectoryError, PermissionError, InterruptedError) as error_obj:
-            LOGGER_OBJ.exception(f"Exception happens during file cache extraction: {error_obj} — {type(error_obj)}")
+            LOGGER_OBJ.exception("Exception happens during file cache extraction")
             raise exceptions.StoreSaveException
 
     async def fetch_raw(self) -> dict:

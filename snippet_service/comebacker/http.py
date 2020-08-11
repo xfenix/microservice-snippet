@@ -16,6 +16,6 @@ async def http_comebacker(meta_data: dict) -> None:
     try:
         async with aiohttp.ClientSession() as session:
             await session.post(settings.HTTP_COMEBACKER_DESTINATON, json=meta_data)
-    except aiohttp.ClientError as error_obj:
-        LOGGER_OBJ.exception(f"Exception happens during snippet extraction: {error_obj} — {type(error_obj)}")
+    except aiohttp.ClientError:
+        LOGGER_OBJ.exception("Exception happens during snippet extraction")
         raise exceptions.HttpComebackerException
