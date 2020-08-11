@@ -4,6 +4,7 @@ import pathlib
 import envcast
 
 
+SENTRY_DSN: str = envcast.env("SNIPPET_SENTRY_DSN")
 API_PREFIX: str = envcast.env("SNIPPET_API_PREFIX").rstrip("/")
 FILE_STORAGE_ROOT: pathlib.Path = envcast.env("SNIPPET_FILE_STORAGE_ROOT", "/srv/storage/", type_cast=pathlib.Path)
 PARSER_PROVIDER: str = envcast.env("SNIPPET_PARSER", "snippet_service.parser:AsyncBSParser")

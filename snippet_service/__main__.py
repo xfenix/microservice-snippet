@@ -4,6 +4,8 @@ import logging
 import typing
 
 import fastapi
+import sentry_sdk
+from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
 from snippet_service import exceptions, helpers, models, settings
 
@@ -57,3 +59,6 @@ async def fetch_remote_snippet(
 
 
 APP_OBJ.include_router(ROUTER_OBJ, prefix=settings.API_PREFIX)
+if settings.SENTRY_DSN:
+    sentry_sdk.init(dsn=settings.SENTRY_DSN)
+    APP_OBJ.add_middleware(SentryAsgiMiddleware)
