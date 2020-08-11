@@ -22,6 +22,7 @@ class FileStorage(BasicStorage):
     """
 
     EXTENSION: str = ".cache.txt"
+    _cache_full_path: pathlib.Path
 
     async def init_storage(self) -> None:
         """Run init."""
@@ -45,7 +46,7 @@ class FileStorage(BasicStorage):
         try:
             async with aiofiles.open(str(self._cache_full_path), "w+") as file_handler:
                 await file_handler.write(orjson.dumps(snippet_data))
-        except (OSError, FileNotFoundError, IsADirectoryError, PermissionError, InterruptedError) as error_obj:
+        except (OSError, FileNotFoundError, IsADirectoryError, PermissionError, InterruptedError):
             LOGGER_OBJ.exception("Exception happens during file cache extraction")
             raise exceptions.StoreSaveException
 

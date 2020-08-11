@@ -29,7 +29,7 @@ class GeneralInterface(typing.Protocol):
         """
         ...
 
-    def extract_meta(self) -> models.SnippetBody:
+    def extract_meta(self, response_body: str) -> models.SnippetBody:
         """Extract snippet data.
 
         Need to be chainable method.
@@ -42,9 +42,12 @@ class BasicParser:
 
     FIELDS_OF_INTEREST: typing.Tuple[str] = ("title", "description", "image")
 
+    def __init__(self) -> None:
+        self._url_source: str = ""
+
     def setup(self, source_url: str) -> None:
         """Simple setup method (now it just like setter)."""
-        self._url_source: str = source_url
+        self._url_source = source_url
         return self
 
     async def fetch_and_extract(self):

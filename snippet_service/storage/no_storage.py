@@ -11,7 +11,7 @@ class DummyStorage(BasicStorage):
         """Check is snippet already in storage."""
         return False
 
-    async def save(self, snippet_data: dict) -> None:
+    async def save(self, _: dict) -> None:
         """Save snippet data in storage."""
         return
 

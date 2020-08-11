@@ -37,12 +37,15 @@ class GeneralInterface(typing.Protocol):
 class BasicStorage:
     """Very simple parent."""
 
+    def __init__(self) -> None:
+        self._data_url: str = ""
+
     async def init_storage(self) -> None:
         """By default do nothing."""
 
     def provide_url(self, source_url: str) -> BasicStorage:
         """Setup basic source url addr."""
-        self._data_url: str = source_url
+        self._data_url = source_url
         return self
 
     async def fetch(self) -> models.SnippetBody:
