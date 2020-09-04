@@ -22,8 +22,10 @@ Quickstart
     bin/app/run.sh
     ```
 
-Usage scenarios
+How to use service
 ===
+If you run stock service, you need to use it somehow. This section describes
+
 ### Usual sync REST service
 * Send request `/?source_url=<desired url>`;
 * Get answer with json with desired metadata. Answer will be available after some period of time (while service is goind to source_url and parse data, time depends on various factors: network, source_url speed and many other things).
@@ -45,6 +47,10 @@ Usage scenarios
 * Send request `/?source_url=<desired url>`;
 * Get answer immediately;
 * Wait answer on some url OR in MQ.
+
+Extend
+===
+TODO
 
 Environment variables
 ===
